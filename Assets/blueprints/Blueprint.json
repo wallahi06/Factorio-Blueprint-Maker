@@ -1,0 +1,16 @@
+{
+  "blueprintInformation": {
+    "label": "Blueprint",
+    "description": null,
+    "entities": [],
+    "icons": [
+      {
+        "signal": {
+          "type": "item",
+          "name": "assembling-machine-3"
+        },
+        "index": 1
+      }
+    ]
+  }
+}

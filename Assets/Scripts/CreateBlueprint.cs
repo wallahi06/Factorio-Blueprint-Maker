@@ -93,26 +93,43 @@ public class CreateBlueprint : MonoBehaviour    {
         // function that creates the JSON file
         public void createBlueprintJSON()
         {
-            // sets all blueprint information parameters
-            blueprint = new Blueprint()
+
+            string path = Path.Combine(Application.dataPath, "blueprints/");
+            DirectoryInfo dir = new DirectoryInfo(path);
+            FileInfo[] files = dir.GetFiles();
+
+            foreach (FileInfo file in files)
             {
-                blueprintInformation = new BlueprintInformation()
+                if (Path.GetFileNameWithoutExtension(file.FullName) != label)
                 {
-                    label = label,
-                    description = description,
-                    entities = blueprintInformation.entities,
-                    icons = blueprintInformation.icons
+                    if (label != null && description != null)
+                    {
+                        // sets all blueprint information parameters
+                        blueprint = new Blueprint()
+                        {
+                            blueprintInformation = new BlueprintInformation()
+                            {
+                                label = label,
+                                description = description,
+                                entities = blueprintInformation.entities,
+                                icons = blueprintInformation.icons
+                            }
+                        };
+
+                        writeToFile();
+
+                    } else
+                    {
+                        Debug.Log("make sure that no field is blank");
+                    }
+
+
+                } else
+                {
+                    Debug.Log(label + " already exists");
                 }
-            };
-
-            writeToFile();
-
+            } 
         }
-
-
-
-        // ADD  CHECKS IF FIELDS ARE EMPTY, MAYBE A POPUP
-
 
 
         public void writeToFile()
@@ -169,27 +186,94 @@ public class CreateBlueprint : MonoBehaviour    {
             };
 
             blueprintInformation.icons.Add(icon);
-            writeToFile();
-
         }
 
-        private FileInfo[] files;
-        private int icon_index = 1;
+
+        public int icon_index = 1;
 
         [SerializeField] private GameObject childObjectPrefab;
         [SerializeField] private Transform panelTransform;
         GameObject childObject;
 
-        void
+        public GameObject iconSelectionView;
+        [SerializeField] private Button exitIconSelectionButton;
+
+
+        public void icon_selection_1()
+        {
+            iconSelectionView.SetActive(true);
+            icon_index = 1;
+            setIconView();
+        }
+
+        public void icon_selection_2()
+        {
+            iconSelectionView.SetActive(true);
+            icon_index = 2;
+            setIconView();
+        }
+
+        public void icon_selection_3()
+        {
+            iconSelectionView.SetActive(true);
+            icon_index = 3;
+            setIconView();
+        }
+
+        public void icon_selection_4()
+        {
+            iconSelectionView.SetActive(true);
+            icon_index = 4;
+            setIconView();
+        }
 
         void setIconView()
         {
 
+            if (blueprintInformation.icons.Count > 0)
+            {
+                for (int i = 0; i < blueprintInformation.icons.Count; i++)
+                {
+                    if (icon_index == blueprintInformation.icons[i].index)
+                    {
+                        Debug.Log("Adding the new icon because icon index: " + i + " is already imported");
+                        // load the new icon to the icon index
+                    }
+                }
+            } else
+            {
+                foreach (Transform child in panelTransform)
+                {
+                    Button test = child.transform.GetComponent<Button>();
+                    test.onClick.RemoveAllListeners();
+                    test.onClick.AddListener(() =>
+                    {
+                        addIcon(child.name, icon_index);
+                        iconSelectionView.SetActive(false);
+                        Debug.Log("Adding " + child.name + " to the icon index: " + icon_index);
+
+                    });
+                }
+            }
+
+            Button exitButton = exitIconSelectionButton.transform.GetComponent<Button>();
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(() =>
+            {
+                iconSelectionView.SetActive(false);
+            });
+
+        }
+
+
+        void Start() {
+
+            iconSelectionView.SetActive(false);
             childObjectPrefab.SetActive(false);
 
             string path = Path.Combine(Application.dataPath, "Resources/InventoryIcons/");
             DirectoryInfo dir = new DirectoryInfo(path);
-            files = dir.GetFiles();
+            FileInfo[] files = dir.GetFiles();
 
             foreach (FileInfo file in files)
             {
@@ -209,16 +293,6 @@ public class CreateBlueprint : MonoBehaviour    {
 
                     imageComponent.sprite = newSprite;
                 }
-            }
-
-            foreach (Transform child in panelTransform)
-            {
-                Button test = child.transform.GetComponent<Button>();
-                test.onClick.RemoveAllListeners();
-                test.onClick.AddListener(() =>
-                {
-                    addIcon(child.name, icon_index);
-                });
             }
         }
 
