@@ -234,6 +234,7 @@ public class CreateBlueprint : MonoBehaviour    {
         public void icon_selection_1()
         {
             iconSelectionView.SetActive(true);
+            blurScreen.SetActive(true);
             icon_index = 1;
             setIconView();
         }
@@ -241,6 +242,7 @@ public class CreateBlueprint : MonoBehaviour    {
         public void icon_selection_2()
         {
             iconSelectionView.SetActive(true);
+            blurScreen.SetActive(true);
             icon_index = 2;
             setIconView();
         }
@@ -248,6 +250,7 @@ public class CreateBlueprint : MonoBehaviour    {
         public void icon_selection_3()
         {
             iconSelectionView.SetActive(true);
+            blurScreen.SetActive(true);
             icon_index = 3;
             setIconView();
         }
@@ -255,13 +258,14 @@ public class CreateBlueprint : MonoBehaviour    {
         public void icon_selection_4()
         {
             iconSelectionView.SetActive(true);
+            blurScreen.SetActive(true);
             icon_index = 4;
             setIconView();
         }
 
 
         public GameObject IconSlots;
-
+        public GameObject blurScreen;
 
         void setIconView()
         {
@@ -278,7 +282,6 @@ public class CreateBlueprint : MonoBehaviour    {
                         {
                             if (icon_index == blueprintInformation.icons[i].index)
                             {
-                                Debug.Log("Importing: " + icon_index);
                                 blueprintInformation.icons[i].signal.name = child.name;
                                 found = true;
                                 break;
@@ -287,13 +290,11 @@ public class CreateBlueprint : MonoBehaviour    {
 
                         if (!found)
                         {
-                            Debug.Log("Adding: " + (icon_index));
                             addIcon(child.name, icon_index);
                         }
                     }
                     else
                     {
-                        Debug.Log("Adding: " + (icon_index));
                         addIcon(child.name, icon_index);
                     }
 
@@ -317,6 +318,8 @@ public class CreateBlueprint : MonoBehaviour    {
                     IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = newSprite2;
 
                     iconSelectionView.SetActive(false);
+                    blurScreen.SetActive(false);
+
                 });
             }
 
@@ -325,6 +328,7 @@ public class CreateBlueprint : MonoBehaviour    {
             exitButton.onClick.AddListener(() =>
             {
                 iconSelectionView.SetActive(false);
+                blurScreen.SetActive(false);
             });
         }
 
@@ -334,6 +338,7 @@ public class CreateBlueprint : MonoBehaviour    {
 
             iconSelectionView.SetActive(false);
             childObjectPrefab.SetActive(false);
+            blurScreen.SetActive(false);
 
             string path = Path.Combine(Application.dataPath, "Resources/InventoryIcons/");
             DirectoryInfo dir = new DirectoryInfo(path);
