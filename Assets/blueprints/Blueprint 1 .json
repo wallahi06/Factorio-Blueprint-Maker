@@ -1,0 +1,37 @@
+{
+  "blueprintInformation": {
+    "label": "Blueprint 1 ",
+    "description": "Blueprint 1 description",
+    "entities": [],
+    "icons": [
+      {
+        "signal": {
+          "type": "item",
+          "name": "centrifuge"
+        },
+        "index": 1
+      },
+      {
+        "signal": {
+          "type": "item",
+          "name": "chemical-science-pack"
+        },
+        "index": 2
+      },
+      {
+        "signal": {
+          "type": "item",
+          "name": "assembling-machine-2"
+        },
+        "index": 3
+      },
+      {
+        "signal": {
+          "type": "item",
+          "name": "assembling-machine-1"
+        },
+        "index": 4
+      }
+    ]
+  }
+}
