@@ -173,8 +173,54 @@ public class CreateBlueprint : MonoBehaviour    {
 
         }
 
+        private FileInfo[] files;
+        private int icon_index = 1;
 
+        [SerializeField] private GameObject childObjectPrefab;
+        [SerializeField] private Transform panelTransform;
+        GameObject childObject;
 
+        void
+
+        void setIconView()
+        {
+
+            childObjectPrefab.SetActive(false);
+
+            string path = Path.Combine(Application.dataPath, "Resources/InventoryIcons/");
+            DirectoryInfo dir = new DirectoryInfo(path);
+            files = dir.GetFiles();
+
+            foreach (FileInfo file in files)
+            {
+                if (file.Extension == ".png")
+                {
+                    childObject = Instantiate(childObjectPrefab, panelTransform);
+                    childObject.SetActive(true);
+                    childObject.name = Path.GetFileNameWithoutExtension(file.FullName);
+
+                    Texture2D texture = new Texture2D(2, 2);
+                    byte[] imageData = File.ReadAllBytes(file.FullName);
+                    texture.LoadImage(imageData);
+
+                    Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+
+                    Image imageComponent = childObject.transform.GetChild(0).GetComponent<Image>();
+
+                    imageComponent.sprite = newSprite;
+                }
+            }
+
+            foreach (Transform child in panelTransform)
+            {
+                Button test = child.transform.GetComponent<Button>();
+                test.onClick.RemoveAllListeners();
+                test.onClick.AddListener(() =>
+                {
+                    addIcon(child.name, icon_index);
+                });
+            }
+        }
 
     }
 
