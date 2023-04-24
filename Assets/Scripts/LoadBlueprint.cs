@@ -128,7 +128,16 @@ namespace JsonParser
                     childObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.label;
                     childObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.description;
 
+                    
+                    Texture2D texture = new Texture2D(2, 2);
+                    byte[] imageData = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{blueprint.blueprintInformation.icons[0].signal.name}.png");
+                    texture.LoadImage(imageData);
+                    
+                    Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
 
+                    childObject.transform.GetChild(3).transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
+
+                    
 
                     // delete button
                     Button deleteButton = childObject.transform.GetChild(2).GetComponent<Button>();

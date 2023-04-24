@@ -98,37 +98,69 @@ public class CreateBlueprint : MonoBehaviour    {
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] files = dir.GetFiles();
 
-            foreach (FileInfo file in files)
-            {
-                if (Path.GetFileNameWithoutExtension(file.FullName) != label)
+                // check if there are any files, if not just create it
+                if (files.Length > 0)
                 {
-                    if (label != null && description != null)
+                    foreach (FileInfo file in files)
                     {
-                        // sets all blueprint information parameters
-                        blueprint = new Blueprint()
+                        if (Path.GetFileNameWithoutExtension(file.FullName) != label)
                         {
-                            blueprintInformation = new BlueprintInformation()
+                            // sets all blueprint information parameters
+                            blueprint = new Blueprint()
                             {
-                                label = label,
-                                description = description,
-                                entities = blueprintInformation.entities,
-                                icons = blueprintInformation.icons
-                            }
-                        };
+                                blueprintInformation = new BlueprintInformation()
+                                {
+                                    label = label,
+                                    description = description,
+                                    entities = blueprintInformation.entities,
+                                    icons = blueprintInformation.icons
+                                }
+                            };
 
-                        writeToFile();
+                            writeToFile();
 
-                    } else
-                    {
-                        Debug.Log("make sure that no field is blank");
+                        }
+                        else
+                        {
+                            Debug.Log(label + " already exists");
+                        }
+
                     }
-
-
-                } else
-                {
-                    Debug.Log(label + " already exists");
                 }
-            } 
+                else
+                {
+                    // sets all blueprint information parameters
+                    blueprint = new Blueprint()
+                    {
+                        blueprintInformation = new BlueprintInformation()
+                        {
+                            label = label,
+                            description = description,
+                            entities = blueprintInformation.entities,
+                            icons = blueprintInformation.icons
+                        }
+                    };
+
+                    writeToFile();
+                }
+
+            blueprintInformation.label = null;
+            blueprintInformation.description = null;
+            blueprintInformation.icons = new List<Icon>();
+
+
+
+
+            // reset function later
+            for (int i = 0; i < 4; i++)
+            {
+                IconSlots.transform.GetChild(i).transform.GetChild(0).GetComponent<Image>().sprite = null;
+                IconSlots.transform.GetChild(i).transform.GetChild(0).GetComponent<Image>().color = new Color(0.1921569f, 0.1921569f, 0.1921569f);
+            }
+
+            IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = null;
+            IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 0);
+
         }
 
 
@@ -227,33 +259,65 @@ public class CreateBlueprint : MonoBehaviour    {
             setIconView();
         }
 
+
+        public GameObject IconSlots;
+
+
         void setIconView()
         {
-
-            if (blueprintInformation.icons.Count > 0)
+            foreach (Transform child in panelTransform)
             {
-                for (int i = 0; i < blueprintInformation.icons.Count; i++)
+                Button test1 = child.transform.GetComponent<Button>();
+                test1.onClick.RemoveAllListeners();
+                test1.onClick.AddListener(() =>
                 {
-                    if (icon_index == blueprintInformation.icons[i].index)
+                    if (blueprintInformation.icons.Count > 0)
                     {
-                        Debug.Log("Adding the new icon because icon index: " + i + " is already imported");
-                        // load the new icon to the icon index
+                        bool found = false;
+                        for (int i = 0; i < blueprintInformation.icons.Count; i++)
+                        {
+                            if (icon_index == blueprintInformation.icons[i].index)
+                            {
+                                Debug.Log("Importing: " + icon_index);
+                                blueprintInformation.icons[i].signal.name = child.name;
+                                found = true;
+                                break;
+                            }
+                        }
+
+                        if (!found)
+                        {
+                            Debug.Log("Adding: " + (icon_index));
+                            addIcon(child.name, icon_index);
+                        }
                     }
-                }
-            } else
-            {
-                foreach (Transform child in panelTransform)
-                {
-                    Button test = child.transform.GetComponent<Button>();
-                    test.onClick.RemoveAllListeners();
-                    test.onClick.AddListener(() =>
+                    else
                     {
+                        Debug.Log("Adding: " + (icon_index));
                         addIcon(child.name, icon_index);
-                        iconSelectionView.SetActive(false);
-                        Debug.Log("Adding " + child.name + " to the icon index: " + icon_index);
+                    }
 
-                    });
-                }
+                    Texture2D texture = new Texture2D(2, 2);
+                    byte[] imageData = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{child.name}.png");
+                    texture.LoadImage(imageData);
+
+                    Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
+
+                    IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
+                    IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                    IconSlots.transform.GetChild(icon_index - 1).name = child.name;
+
+                    Texture2D texture2 = new Texture2D(2, 2);
+                    byte[] imageData2 = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{IconSlots.transform.GetChild(0).name}.png");
+                    texture2.LoadImage(imageData2);
+
+                    Sprite newSprite2 = Sprite.Create(texture2, new Rect(0, 0, texture2.width, texture2.height), Vector2.one * 0.5f);
+
+                    IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                    IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = newSprite2;
+
+                    iconSelectionView.SetActive(false);
+                });
             }
 
             Button exitButton = exitIconSelectionButton.transform.GetComponent<Button>();
@@ -262,8 +326,8 @@ public class CreateBlueprint : MonoBehaviour    {
             {
                 iconSelectionView.SetActive(false);
             });
-
         }
+
 
 
         void Start() {
