@@ -2064,7 +2064,7 @@ GameObject:
   - component: {fileID: 375853222}
   - component: {fileID: 375853221}
   m_Layer: 5
-  m_Name: Image
+  m_Name: IconObjectsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5817,7 +5817,7 @@ GameObject:
   - component: {fileID: 1016162760}
   - component: {fileID: 1016162759}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: IconSelectionTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6745,7 +6745,7 @@ GameObject:
   - component: {fileID: 1154979024}
   - component: {fileID: 1154979023}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ExitIconSelectionView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8416,7 +8416,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -0.000030517578, y: -0.000030517578}
-  m_SizeDelta: {x: 1200, y: 40}
+  m_SizeDelta: {x: 1200, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1331875459
 MonoBehaviour:
@@ -10013,7 +10013,6 @@ GameObject:
   - component: {fileID: 1556570610}
   - component: {fileID: 1556570613}
   - component: {fileID: 1556570614}
-  - component: {fileID: 1556570615}
   m_Layer: 0
   m_Name: ScriptHolder
   m_TagString: Untagged
@@ -10089,25 +10088,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a1c3381f588ce4f9d54f9656500265, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  IconSlots: {fileID: 2080357606}
-  icon_index: 1
-  childObjectPrefab: {fileID: 2043723999}
-  panelTransform: {fileID: 637159267}
+  labelInputField: {fileID: 1295148077}
+  descriptionInputField: {fileID: 1738216132}
+  IconObjectPrefab: {fileID: 2043723999}
+  IconObjectContainer: {fileID: 637159267}
   iconSelectionView: {fileID: 1761102375}
   exitIconSelectionButton: {fileID: 1154979023}
---- !u!114 &1556570615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1556570609}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28fc3e970e2e17843810e8fe62c32320, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myInputField: {fileID: 1738216132}
+  IconSlots: {fileID: 2080357606}
 --- !u!1 &1565702615
 GameObject:
   m_ObjectHideFlags: 0
@@ -10421,7 +10408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1644540216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11400,12 +11387,12 @@ GameObject:
   - component: {fileID: 1761102378}
   - component: {fileID: 1761102377}
   m_Layer: 5
-  m_Name: Image
+  m_Name: IconSelectionView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1761102376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13230,7 +13217,7 @@ GameObject:
   - component: {fileID: 2043724002}
   - component: {fileID: 2043724001}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: IconObjectPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13588,7 +13575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2086301517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13967,7 +13954,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "\u200B"
-  m_isRightToLeft: 1
+  m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
