@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using Newtonsoft.Json;
+using TMPro;
 
 
 namespace JsonParser
@@ -65,12 +66,20 @@ namespace JsonParser
 
         private string description;
         private string label;
+        private int icon_index;
 
-        private int entity_number = 1;
-        private string name = "test";
-        private int x = 1;
-        private int y = 1;
-        private int direction = 1;
+        [SerializeField] public GameObject labelInputField;
+        [SerializeField] public GameObject descriptionInputField;
+
+
+        [SerializeField] private GameObject IconObjectPrefab;
+        [SerializeField] private Transform IconObjectContainer;
+        GameObject childObject;
+
+        public GameObject iconSelectionView;
+        [SerializeField] private Button exitIconSelectionButton;
+
+        public GameObject IconSlots;
 
         private Blueprint blueprint;
         private Signal signal;
@@ -82,88 +91,129 @@ namespace JsonParser
         };
 
 
-        // gets the description and label from input fields
-        public void setDescription(string get_description)
+        void Start()
         {
-            description = get_description;
+            iconSelectionView.SetActive(false);
+            IconObjectPrefab.SetActive(false);
+
+            initiateIconInventory();
+         }
+
+
+        // create blueprint object
+        public void createBlueprintObject()
+        {
+            // sets all blueprint information parameters
+            blueprint = new Blueprint()
+            {
+                blueprintInformation = new BlueprintInformation()
+                {
+                    label = label,
+                    description = description,
+                    entities = blueprintInformation.entities,
+                    icons = blueprintInformation.icons
+                }
+            };
+
+            writeToFile();
         }
 
-        public void setLabel(string get_label)
+
+        // adds the entity to the blueprint JSON file
+        public void createEntity()
         {
-            label = get_label;
+            Entity entity = new Entity()
+            {
+                entity_number = 1,
+                name = "transport-belt",
+                position = new Position()
+                {
+                    x = 1,
+                    y = 1
+                },
+                direction = 1
+            };
+
+            blueprintInformation.entities.Add(entity);
+            writeToFile();
         }
+
+
+        // creates Icon and import icon parameter 
+        public void addIcon(string icon_name, int icon_index)
+        {
+
+            Icon icon = new Icon()
+            {
+                signal = new Signal()
+                {
+                    type = "item",
+                    name = icon_name
+                },
+                index = icon_index
+            };
+
+            blueprintInformation.icons.Add(icon);
+        }
+
 
         // function that creates the JSON file
         public void createBlueprintJSON()
         {
-            
+
+            // sets the label and description to the value of the input fields
+            label = labelInputField.GetComponent<TMP_InputField>().text;
+            description = descriptionInputField.GetComponent<TMP_InputField>().text;
+
             // list all blueprint files in the blueprints folder
             string path = Path.Combine(Application.dataPath, "blueprints/");
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] files = dir.GetFiles();
 
+
+            // check so the input fields are not empty or null
+            if (!string.IsNullOrEmpty(description) || !string.IsNullOrEmpty(label)) {
+
                 // check if there are any files, if not just create one
-                if (files.Length > 0)
-                {
-                    foreach (FileInfo file in files)
-                    {
+                if (files.Length > 0)   {
+
+                    foreach (FileInfo file in files)    {
+
                         // check if the blueprint file that is created already exists, if not create it
-                        if (Path.GetFileNameWithoutExtension(file.FullName) != label)
-                        {
-                            // sets all blueprint information parameters
-                            blueprint = new Blueprint()
-                            {
-                                blueprintInformation = new BlueprintInformation()
-                                {
-                                    label = label,
-                                    description = description,
-                                    entities = blueprintInformation.entities,
-                                    icons = blueprintInformation.icons
-                                }
-                            };
+                        if (Path.GetFileNameWithoutExtension(file.FullName) != label)   {
+                            createBlueprintObject();
 
-                            writeToFile();
-
-                        }
-                        else
-                        {
+                        } else  {
                             Debug.Log(label + " already exists");
                         }
-
                     }
+                } else  {
+                    createBlueprintObject();
                 }
-                else
-                {
-                    // sets all blueprint information parameters
-                    blueprint = new Blueprint()
-                    {
-                        blueprintInformation = new BlueprintInformation()
-                        {
-                            label = label,
-                            description = description,
-                            entities = blueprintInformation.entities,
-                            icons = blueprintInformation.icons
-                        }
-                    };
+            } else  {
+                Debug.Log("There are empty field!");
+            }
 
-                    writeToFile();
-                }
-                
-                resetCreateFileView();
+            resetCreateFileView();
         }
 
     
         // resets all the input fields and icon slots when file is created
         public void resetCreateFileView() 
         {
+
+            // reset all the input fields
+            labelInputField.GetComponent<TMP_InputField>().text = "";
+            descriptionInputField.GetComponent<TMP_InputField>().text = "";
+
             // reset the blueprintInformation parameters
             blueprintInformation.label = null;
             blueprintInformation.description = null;
             blueprintInformation.icons = new List<Icon>();
-            blueprintInformation.entites new List<Entity>();
+            blueprintInformation.entities = new List<Entity>();
             
             // iterates over all the icon slots and resets them
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < IconSlots.transform.childCount; i++)
             {
                 IconSlots.transform.GetChild(i).transform.GetChild(0).GetComponent<Image>().sprite = null;
                 IconSlots.transform.GetChild(i).transform.GetChild(0).GetComponent<Image>().color = new Color(0.1921569f, 0.1921569f, 0.1921569f);
@@ -172,9 +222,7 @@ namespace JsonParser
             // reset the Icon placeholder
             IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = null;
             IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color = new Color(1, 1, 1, 0);
-            
-            // reset the input fields
-            
+
         }
         
 
@@ -197,88 +245,33 @@ namespace JsonParser
         }
 
 
-        // adds the entity to the blueprint JSON file
-        public void createEntity()
-        {
-            Entity entity = new Entity()
-            {
-                entity_number = entity_number,
-                name = name,
-                position = new Position()
-                {
-                    x = x,
-                    y = y
-                },
-                direction = direction
-            };
-
-            blueprintInformation.entities.Add(entity);
-            writeToFile();
-
-        }
-
-
-        // creates Icon and import icon parameter 
-        public void addIcon(string icon_name, int icon_index)
-        {
-
-            Icon icon = new Icon()
-            {
-                signal = new Signal()
-                {
-                    type = "item",
-                    name = icon_name
-                },
-                index = icon_index
-            };
-
-            blueprintInformation.icons.Add(icon);
-        }
-
-
-        public int icon_index = 1;
-
-        [SerializeField] private GameObject childObjectPrefab;
-        [SerializeField] private Transform panelTransform;
-        GameObject childObject;
-
-        public GameObject iconSelectionView;
-        [SerializeField] private Button exitIconSelectionButton;
-
-
-        public void icon_selection_1()
-        {
+        public void icon_selection_1()  {
             icon_index = 1;
             setIconView();
         }
 
-        public void icon_selection_2()
-        {
+        public void icon_selection_2()  {
             icon_index = 2;
             setIconView();
         }
 
-        public void icon_selection_3()
-        {
+        public void icon_selection_3()  {
             icon_index = 3;
             setIconView();
         }
 
-        public void icon_selection_4()
-        {
+        public void icon_selection_4()  {
             icon_index = 4;
             setIconView();
         }
 
-
-        public GameObject IconSlots;
 
         void setIconView()
         {
         
             iconSelectionView.SetActive(true);
         
-            foreach (Transform child in panelTransform)
+            foreach (Transform child in IconObjectContainer)
             {
                 Button test1 = child.transform.GetComponent<Button>();
                 test1.onClick.RemoveAllListeners();
@@ -331,30 +324,31 @@ namespace JsonParser
                 });
             }
 
+
             Button exitButton = exitIconSelectionButton.transform.GetComponent<Button>();
             exitButton.onClick.RemoveAllListeners();
             exitButton.onClick.AddListener(() =>
             {
                 iconSelectionView.SetActive(false);
             });
+
         }
 
 
-
-        void Start() {
-
-            iconSelectionView.SetActive(false);
-            childObjectPrefab.SetActive(false);
-
+        // gets all the files from the icon dictory and adds an object for each file
+        void initiateIconInventory()
+        {
+            // stores all the files in "files"
             string path = Path.Combine(Application.dataPath, "Resources/InventoryIcons/");
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] files = dir.GetFiles();
 
+            // iterates over all the files
             foreach (FileInfo file in files)
             {
                 if (file.Extension == ".png")
                 {
-                    childObject = Instantiate(childObjectPrefab, panelTransform);
+                    childObject = Instantiate(IconObjectPrefab, IconObjectContainer);
                     childObject.SetActive(true);
                     childObject.name = Path.GetFileNameWithoutExtension(file.FullName);
 
@@ -367,6 +361,7 @@ namespace JsonParser
                     Image imageComponent = childObject.transform.GetChild(0).GetComponent<Image>();
 
                     imageComponent.sprite = newSprite;
+
                 }
             }
         }

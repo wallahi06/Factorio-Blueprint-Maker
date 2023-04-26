@@ -135,6 +135,7 @@ namespace JsonParser
                     
                     Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
 
+                    childObject.transform.GetChild(3).transform.GetChild(0).GetComponent<Image>().color = Color.white;
                     childObject.transform.GetChild(3).transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
 
                     
