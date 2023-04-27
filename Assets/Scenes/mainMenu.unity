@@ -292,7 +292,7 @@ GameObject:
   - component: {fileID: 62849185}
   - component: {fileID: 62849184}
   m_Layer: 5
-  m_Name: Exit Delete Blueprint Popup Button
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1037,6 +1037,7 @@ GameObject:
   - component: {fileID: 130778623}
   - component: {fileID: 130778625}
   - component: {fileID: 130778624}
+  - component: {fileID: 130778626}
   m_Layer: 5
   m_Name: IconSlot 4
   m_TagString: Untagged
@@ -1102,6 +1103,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130778622}
   m_CullTransparentMesh: 1
+--- !u!114 &130778626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 130778622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 130778624}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &135438067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1775,6 +1820,7 @@ GameObject:
   - component: {fileID: 325424393}
   - component: {fileID: 325424395}
   - component: {fileID: 325424394}
+  - component: {fileID: 325424396}
   m_Layer: 5
   m_Name: IconSlot 1
   m_TagString: Untagged
@@ -1840,6 +1886,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 325424392}
   m_CullTransparentMesh: 1
+--- !u!114 &325424396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 325424392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 325424394}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &329252118
 GameObject:
   m_ObjectHideFlags: 0
@@ -2140,6 +2230,7 @@ GameObject:
   - component: {fileID: 377882569}
   - component: {fileID: 377882571}
   - component: {fileID: 377882570}
+  - component: {fileID: 377882572}
   m_Layer: 5
   m_Name: IconSlot 2
   m_TagString: Untagged
@@ -2205,6 +2296,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 377882568}
   m_CullTransparentMesh: 1
+--- !u!114 &377882572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 377882568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 377882570}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &398719346
 GameObject:
   m_ObjectHideFlags: 0
@@ -2487,7 +2622,7 @@ GameObject:
   - component: {fileID: 440236517}
   - component: {fileID: 440236516}
   m_Layer: 5
-  m_Name: Exit Options View Button
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2560,7 +2695,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1556570610}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
-        m_MethodName: mainMenuPage
+        m_MethodName: mainmenuPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3147,6 +3282,7 @@ GameObject:
   - component: {fileID: 552131347}
   - component: {fileID: 552131349}
   - component: {fileID: 552131348}
+  - component: {fileID: 552131350}
   m_Layer: 5
   m_Name: IconSlot 3
   m_TagString: Untagged
@@ -3212,6 +3348,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552131346}
   m_CullTransparentMesh: 1
+--- !u!114 &552131350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 552131346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 552131348}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &566138551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5089,7 +5269,7 @@ GameObject:
   - component: {fileID: 893592398}
   - component: {fileID: 893592397}
   m_Layer: 5
-  m_Name: ExitClipboard
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6745,7 +6925,7 @@ GameObject:
   - component: {fileID: 1154979024}
   - component: {fileID: 1154979023}
   m_Layer: 5
-  m_Name: ExitIconSelectionView
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8237,7 +8417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1298295844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8416,7 +8596,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -0.000030517578, y: -0.000030517578}
-  m_SizeDelta: {x: 1200, y: 0}
+  m_SizeDelta: {x: 1200, y: 40}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1331875459
 MonoBehaviour:
@@ -8831,7 +9011,7 @@ GameObject:
   - component: {fileID: 1403304501}
   - component: {fileID: 1403304500}
   m_Layer: 5
-  m_Name: Exit Loadingview Button
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8904,7 +9084,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1556570610}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
-        m_MethodName: mainMenuPage
+        m_MethodName: mainmenuPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10032,10 +10212,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec67fe1d49ec9544b954be4810aa8483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  createBlueprint: {fileID: 1735974021}
-  loadBlueprint: {fileID: 2086301516}
-  optionsMenu: {fileID: 925075438}
-  mainMenu: {fileID: 98386385}
+  createBlueprintView: {fileID: 1735974021}
+  loadBlueprintView: {fileID: 2086301516}
+  optionsMenuView: {fileID: 925075438}
+  mainMenuView: {fileID: 98386385}
+  DeleteBlueprintPopup: {fileID: 1873029810}
+  copystringPopup: {fileID: 1131333726}
+  LoadBlueprintEditor: {fileID: 1298295843}
+  IconSelectionView: {fileID: 1761102375}
+  blurImage: {fileID: 1318794368}
 --- !u!4 &1556570611
 Transform:
   m_ObjectHideFlags: 0
@@ -10064,18 +10249,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected_object: 
-  deletePopup: {fileID: 1873029810}
-  copyToClipboardView: {fileID: 1131333726}
-  blurImage: {fileID: 1318794368}
-  editBlueprintView: {fileID: 1298295843}
   childObjectPrefab: {fileID: 1959252351}
   panelTransform: {fileID: 1331875458}
   testButton: {fileID: 1929643612}
-  exitDeleteButton: {fileID: 62849184}
-  exitCopyToClipboard: {fileID: 893592397}
+  editBlueprintEditorButton: {fileID: 789910083}
   copyToClipboardButton: {fileID: 904313035}
-  exitBLueprintEditor: {fileID: 2122865963}
-  editBlueprintEditor: {fileID: 789910083}
+  IconObjectContainer: {fileID: 637159267}
 --- !u!114 &1556570614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10093,7 +10272,6 @@ MonoBehaviour:
   IconObjectPrefab: {fileID: 2043723999}
   IconObjectContainer: {fileID: 637159267}
   iconSelectionView: {fileID: 1761102375}
-  exitIconSelectionButton: {fileID: 1154979023}
   IconSlots: {fileID: 2080357606}
 --- !u!1 &1565702615
 GameObject:
@@ -10408,7 +10586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1644540216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10851,7 +11029,7 @@ GameObject:
   - component: {fileID: 1726654691}
   - component: {fileID: 1726654690}
   m_Layer: 5
-  m_Name: Exit Create Blueprint View Button
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10924,7 +11102,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1556570610}
         m_TargetAssemblyTypeName: MainMenuHandler, Assembly-CSharp
-        m_MethodName: mainMenuPage
+        m_MethodName: mainmenuPage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11392,7 +11570,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1761102376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13575,7 +13753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2086301517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14178,7 +14356,7 @@ GameObject:
   - component: {fileID: 2122865964}
   - component: {fileID: 2122865963}
   m_Layer: 5
-  m_Name: ExitBlueprintFileEditor
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

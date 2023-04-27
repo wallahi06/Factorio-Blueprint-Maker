@@ -70,16 +70,14 @@ namespace JsonParser
 
         [SerializeField] public GameObject labelInputField;
         [SerializeField] public GameObject descriptionInputField;
-
-
         [SerializeField] private GameObject IconObjectPrefab;
         [SerializeField] private Transform IconObjectContainer;
+
         GameObject childObject;
-
-        public GameObject iconSelectionView;
-        [SerializeField] private Button exitIconSelectionButton;
-
         public GameObject IconSlots;
+
+
+        private MainMenuHandler mainmenu;
 
         private Blueprint blueprint;
         private Signal signal;
@@ -93,8 +91,8 @@ namespace JsonParser
 
         void Start()
         {
-            iconSelectionView.SetActive(false);
             IconObjectPrefab.SetActive(false);
+            mainmenu = GetComponent<MainMenuHandler>();
 
             initiateIconInventory();
          }
@@ -172,7 +170,7 @@ namespace JsonParser
 
 
             // check so the input fields are not empty or null
-            if (!string.IsNullOrEmpty(description) || !string.IsNullOrEmpty(label)) {
+            if (!string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text) || !string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text)) {
 
                 // check if there are any files, if not just create one
                 if (files.Length > 0)   {
@@ -268,8 +266,8 @@ namespace JsonParser
 
         void setIconView()
         {
-        
-            iconSelectionView.SetActive(true);
+
+            mainmenu.IconSelectionView.SetActive(true);
         
             foreach (Transform child in IconObjectContainer)
             {
@@ -277,6 +275,7 @@ namespace JsonParser
                 test1.onClick.RemoveAllListeners();
                 test1.onClick.AddListener(() =>
                 {
+
                     if (blueprintInformation.icons.Count > 0)
                     {
                         bool found = false;
@@ -319,19 +318,10 @@ namespace JsonParser
                     IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
                     IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = newSprite2;
 
-                    iconSelectionView.SetActive(false);
+                    mainmenu.IconSelectionView.SetActive(false);
 
                 });
             }
-
-
-            Button exitButton = exitIconSelectionButton.transform.GetComponent<Button>();
-            exitButton.onClick.RemoveAllListeners();
-            exitButton.onClick.AddListener(() =>
-            {
-                iconSelectionView.SetActive(false);
-            });
-
         }
 
 

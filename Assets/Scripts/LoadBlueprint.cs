@@ -12,17 +12,14 @@ namespace JsonParser
 
     public class LoadBlueprint : MonoBehaviour
     {
-
-        public string selected_object;
-
-        public GameObject deletePopup;
-        public GameObject copyToClipboardView;
-        public GameObject blurImage;
-        public GameObject editBlueprintView;
+        
+        private MainMenuHandler mainmenu;
 
         // The LoadObjects and parent
         [SerializeField] private GameObject childObjectPrefab;
         [SerializeField] private Transform panelTransform;
+        [SerializeField] private Transform IconObjectContainer;
+
         GameObject childObject;
 
         // List of files in the blueprint directory
@@ -31,18 +28,23 @@ namespace JsonParser
         public Blueprint blueprint = new Blueprint();
 
 
-        [SerializeField] private Button testButton;
-        [SerializeField] private Button exitDeleteButton;
-
-        [SerializeField] private Button exitCopyToClipboard;
+        [SerializeField] private Button deleteBlueprintButton;
+        [SerializeField] private Button editBlueprintEditorButton;
         [SerializeField] private Button copyToClipboardButton;
-
-        [SerializeField] private Button exitBLueprintEditor;
-        [SerializeField] private Button editBlueprintEditor;
 
 
         private string label;
         private string description;
+        private int icon_index;
+
+        private GameObject IconSlot;
+
+
+
+        private void Start()
+        {
+            mainmenu = GetComponent<MainMenuHandler>();
+        }
 
         public void setDescription(string get_description)
         {
@@ -92,6 +94,7 @@ namespace JsonParser
             get_blueprints();
 
         }
+
 
 
         // Creates loading obejcts
@@ -151,23 +154,16 @@ namespace JsonParser
                     deleteButton.onClick.AddListener(() =>
                     {
 
-                        blurImage.SetActive(true);
-                        deletePopup.SetActive(true);
+                        mainmenu.blurImage.SetActive(true);
+                        mainmenu.DeleteBlueprintPopup.SetActive(true);
 
-                        testButton.onClick.RemoveAllListeners();
-                        testButton.onClick.AddListener(() =>
+                        deleteBlueprintButton.onClick.RemoveAllListeners();
+                        deleteBlueprintButton.onClick.AddListener(() =>
                         {
                             deleteBlueprintFile(childObject, file.FullName);
 
-                            blurImage.SetActive(false);
-                            deletePopup.SetActive(false);
-                        });
-
-                        exitDeleteButton.onClick.RemoveAllListeners();
-                        exitDeleteButton.onClick.AddListener(() =>
-                        {
-                            blurImage.SetActive(false);
-                            deletePopup.SetActive(false);
+                            mainmenu.blurImage.SetActive(false);
+                            mainmenu.DeleteBlueprintPopup.SetActive(false);
                         });
 
                     });
@@ -178,22 +174,15 @@ namespace JsonParser
                     copyToClipboard.onClick.RemoveAllListeners();
                     copyToClipboard.onClick.AddListener(() =>
                     {
-                        blurImage.SetActive(true);
-                        copyToClipboardView.SetActive(true);
-
-                        exitCopyToClipboard.onClick.RemoveAllListeners();
-                        exitCopyToClipboard.onClick.AddListener(() =>
-                        {
-                            blurImage.SetActive(false);
-                            copyToClipboardView.SetActive(false);
-                        });
+                        mainmenu.blurImage.SetActive(true);
+                        mainmenu.copystringPopup.SetActive(true);
 
                         copyToClipboardButton.onClick.RemoveAllListeners();
                         copyToClipboardButton.onClick.AddListener(() =>
                         {
                             Debug.Log(file.FullName);       //  encoded json string in the future
-                            blurImage.SetActive(false);
-                            copyToClipboardView.SetActive(false);
+                            mainmenu.blurImage.SetActive(false);
+                            mainmenu.copystringPopup.SetActive(false);
                         });
 
                     });
@@ -204,22 +193,15 @@ namespace JsonParser
                     editBlueprint.onClick.RemoveAllListeners();
                     editBlueprint.onClick.AddListener(() =>
                     {
-                        blurImage.SetActive(true);
-                        editBlueprintView.SetActive(true);
+                        mainmenu.blurImage.SetActive(true);
+                        mainmenu.LoadBlueprintEditor.SetActive(true);
 
-                        exitBLueprintEditor.onClick.RemoveAllListeners();
-                        exitBLueprintEditor.onClick.AddListener(() =>
-                        {
-                            blurImage.SetActive(false);
-                            editBlueprintView.SetActive(false);
-                        });
-
-                        editBlueprintEditor.onClick.RemoveAllListeners();
-                        editBlueprintEditor.onClick.AddListener(() =>
+                        editBlueprintEditorButton.onClick.RemoveAllListeners();
+                        editBlueprintEditorButton.onClick.AddListener(() =>
                         {
                             editBlueprintFile(blueprint, label, description, file.FullName);
-                            blurImage.SetActive(false);
-                            editBlueprintView.SetActive(false);
+                            mainmenu.blurImage.SetActive(false);
+                            mainmenu.LoadBlueprintEditor.SetActive(false);
 
                         });
                     });
@@ -244,21 +226,17 @@ namespace JsonParser
                         else
                         {
                             t.GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f);
-                            selected_object = t.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
-                            Debug.Log(selected_object);
+                            //selected_object = t.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
+                            Debug.Log(t.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text);
                         }
                     }
                 });
             }
+
+
         }
 
 
-        void Start()
-        {
-            blurImage.SetActive(false);
-            deletePopup.SetActive(false);
-            copyToClipboardView.SetActive(false);
-            editBlueprintView.SetActive(false);
-        }
+
     }
 }
