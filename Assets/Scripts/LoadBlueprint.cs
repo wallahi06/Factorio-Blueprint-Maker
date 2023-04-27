@@ -15,6 +15,7 @@ namespace JsonParser
     {
         
         private MainMenuHandler mainmenu;
+        private CreateBlueprint blueprintCreater;
 
         // The LoadObjects and parent
         [SerializeField] private GameObject childObjectPrefab;
@@ -41,13 +42,14 @@ namespace JsonParser
         private string description;
         private int icon_index;
 
-        private GameObject IconSlot;
+        public GameObject IconSlot;
 
 
 
         private void Start()
         {
             mainmenu = GetComponent<MainMenuHandler>();
+            blueprintCreater = GetComponent<CreateBlueprint>();
         }
 
         public void setDescription(string get_description)
@@ -209,7 +211,7 @@ namespace JsonParser
                         {
                             if (!string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text) && !string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text))
                             {
-                                editBlueprintFile(blueprint, label, description, file.FullName);
+                                editBlueprintFile(blueprint, labelInputField.GetComponent<TMP_InputField>().text, descriptionInputField.GetComponent<TMP_InputField>().text, file.FullName);
                                 mainmenu.blurImage.SetActive(false);
                                 mainmenu.LoadBlueprintEditor.SetActive(false);
                             } else
@@ -219,9 +221,7 @@ namespace JsonParser
 
                         });
 
-
-                        // add icon selection
-                        // loadNewIcon()
+                        changeIcon(file.FullName);
 
                     });
 
@@ -255,7 +255,65 @@ namespace JsonParser
 
         }
 
+        void changeIcon(string filePath)
+        {
 
+            string jsonContent = File.ReadAllText(filePath);
+            blueprint = JsonConvert.DeserializeObject<Blueprint>(jsonContent);
+
+            foreach (Transform child in IconSlot.transform)
+            {
+                Button iconButton = child.transform.GetComponent<Button>();
+
+                iconButton.onClick.RemoveAllListeners();
+                iconButton.onClick.AddListener(() =>
+                {
+                    mainmenu.IconSelectionView.SetActive(true);
+
+                    if (iconButton.name == "IconSlot 1")
+                    {
+                        icon_index = 1;
+                    }
+                    else if (iconButton.name == "IconSlot 2")
+                    {
+                        icon_index = 2;
+                    }
+                    else if (iconButton.name == "IconSlot 3")
+                    {
+                        icon_index = 3;
+                    }
+                    else if (iconButton.name == "IconSlot 4")
+                    {
+                        icon_index = 4;
+                    }
+
+                    foreach (Transform Icon in IconObjectContainer)
+                    {
+                        Button iconSelectionButton = Icon.GetComponent<Button>();   
+
+                        iconSelectionButton.onClick.RemoveAllListeners();
+                        iconSelectionButton.onClick.AddListener(() =>
+                        {
+                            bool found = false;
+                            for (int i = 0; i < blueprint.blueprintInformation.icons.Count; i++) {
+                                if (icon_index == blueprint.blueprintInformation.icons[i].index) {
+                                    blueprint.blueprintInformation.icons[i].signal.name = iconSelectionButton.name;
+                                    Debug.Log("Load to already existing");
+                                    found = true;
+                                    break;
+                                } 
+                                if(!found)
+                                {
+                                    Debug.Log("Didnt find any icon");
+                                }
+
+                            }
+                            mainmenu.IconSelectionView.SetActive(false);
+                        });
+                    }
+                });
+            }
+        }
 
     }
 }

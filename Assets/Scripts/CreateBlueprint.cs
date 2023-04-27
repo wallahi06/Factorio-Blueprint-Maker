@@ -196,7 +196,7 @@ namespace JsonParser
 
         }
 
-    
+
         // resets all the input fields and icon slots when file is created
         public void resetCreateFileView() 
         {
@@ -312,7 +312,7 @@ namespace JsonParser
                     IconSlots.transform.GetChild(icon_index - 1).name = child.name;
 
                     Texture2D texture2 = new Texture2D(2, 2);
-                    byte[] imageData2 = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{IconSlots.transform.GetChild(0).name}.png");
+                    byte[] imageData2 = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{blueprintInformation.icons[0].signal.name}.png");
                     texture2.LoadImage(imageData2);
 
                     Sprite newSprite2 = Sprite.Create(texture2, new Rect(0, 0, texture2.width, texture2.height), Vector2.one * 0.5f);
