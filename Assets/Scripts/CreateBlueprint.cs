@@ -11,7 +11,6 @@ using TMPro;
 namespace JsonParser
 {
 
-
     // Class with information about the position of the entity
     public class Position
     {
@@ -118,18 +117,18 @@ namespace JsonParser
 
 
         // adds the entity to the blueprint JSON file
-        public void createEntity()
+        public void createEntity(int entity_number, string name, int x, int y, int direction)
         {
             Entity entity = new Entity()
             {
-                entity_number = 1,
-                name = "transport-belt",
+                entity_number = entity_number,
+                name = name,
                 position = new Position()
                 {
-                    x = 1,
-                    y = 1
+                    x = x,
+                    y = y
                 },
-                direction = 1
+                direction = direction
             };
 
             blueprintInformation.entities.Add(entity);
@@ -170,7 +169,7 @@ namespace JsonParser
 
 
             // check so the input fields are not empty or null
-            if (!string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text) || !string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text)) {
+            if (!string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text) && !string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text)) {
 
                 // check if there are any files, if not just create one
                 if (files.Length > 0)   {
@@ -180,19 +179,21 @@ namespace JsonParser
                         // check if the blueprint file that is created already exists, if not create it
                         if (Path.GetFileNameWithoutExtension(file.FullName) != label)   {
                             createBlueprintObject();
+                            resetCreateFileView();
 
-                        } else  {
+                        }
+                        else  {
                             Debug.Log(label + " already exists");
                         }
                     }
                 } else  {
                     createBlueprintObject();
+                    resetCreateFileView();
                 }
             } else  {
                 Debug.Log("There are empty field!");
             }
 
-            resetCreateFileView();
         }
 
     
@@ -262,6 +263,7 @@ namespace JsonParser
             icon_index = 4;
             setIconView();
         }
+
 
 
         void setIconView()

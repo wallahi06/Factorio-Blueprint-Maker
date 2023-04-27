@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using TMPro;
 
 
 namespace JsonParser
@@ -31,6 +32,9 @@ namespace JsonParser
         [SerializeField] private Button deleteBlueprintButton;
         [SerializeField] private Button editBlueprintEditorButton;
         [SerializeField] private Button copyToClipboardButton;
+
+        [SerializeField] public GameObject labelInputField;
+        [SerializeField] public GameObject descriptionInputField;
 
 
         private string label;
@@ -193,17 +197,32 @@ namespace JsonParser
                     editBlueprint.onClick.RemoveAllListeners();
                     editBlueprint.onClick.AddListener(() =>
                     {
+
+                        labelInputField.GetComponent<TMP_InputField>().text = blueprint.blueprintInformation.label;
+                        descriptionInputField.GetComponent<TMP_InputField>().text = blueprint.blueprintInformation.description;
+
                         mainmenu.blurImage.SetActive(true);
                         mainmenu.LoadBlueprintEditor.SetActive(true);
 
                         editBlueprintEditorButton.onClick.RemoveAllListeners();
                         editBlueprintEditorButton.onClick.AddListener(() =>
                         {
-                            editBlueprintFile(blueprint, label, description, file.FullName);
-                            mainmenu.blurImage.SetActive(false);
-                            mainmenu.LoadBlueprintEditor.SetActive(false);
+                            if (!string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text) && !string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text))
+                            {
+                                editBlueprintFile(blueprint, label, description, file.FullName);
+                                mainmenu.blurImage.SetActive(false);
+                                mainmenu.LoadBlueprintEditor.SetActive(false);
+                            } else
+                            {
+                                Debug.Log("There's empty fields!");
+                            }
 
                         });
+
+
+                        // add icon selection
+                        // loadNewIcon()
+
                     });
 
                     childObject.SetActive(true);
@@ -226,8 +245,8 @@ namespace JsonParser
                         else
                         {
                             t.GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f);
-                            //selected_object = t.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
-                            Debug.Log(t.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text);
+                            string selected_object = t.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
+                            Debug.Log(selected_object);
                         }
                     }
                 });

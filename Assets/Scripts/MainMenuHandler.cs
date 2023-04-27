@@ -47,40 +47,41 @@ using UnityEngine.SceneManagement;
 
         }
 
-        void Update()
+    void Update()
+    {
+        exitDeletePopup.onClick.RemoveAllListeners();
+        exitDeletePopup.onClick.AddListener(() =>
         {
-            exitDeletePopup.onClick.RemoveAllListeners();
-            exitDeletePopup.onClick.AddListener(() =>
-            {
-                DeleteBlueprintPopup.SetActive(false);
-                blurImage.SetActive(false);
-            });
+            DeleteBlueprintPopup.SetActive(false);
+            blurImage.SetActive(false);
+        });
 
-            exitCopystringPopup.onClick.RemoveAllListeners();
-            exitCopystringPopup.onClick.AddListener(() =>
-            {
-                copystringPopup.SetActive(false);
-                blurImage.SetActive(false);
-            });
+        exitCopystringPopup.onClick.RemoveAllListeners();
+        exitCopystringPopup.onClick.AddListener(() =>
+        {
+            copystringPopup.SetActive(false);
+            blurImage.SetActive(false);
+        });
 
-            exitLoadBlueprintPopup.onClick.RemoveAllListeners();
-            exitLoadBlueprintPopup.onClick.AddListener(() =>
-            {
-                LoadBlueprintEditor.SetActive(false);
-                blurImage.SetActive(false);
-            });
+        exitLoadBlueprintPopup.onClick.RemoveAllListeners();
+        exitLoadBlueprintPopup.onClick.AddListener(() =>
+        {
+            LoadBlueprintEditor.SetActive(false);
+            blurImage.SetActive(false);
+        });
 
-            exitIconSelectionPopup.onClick.RemoveAllListeners();
-            exitIconSelectionPopup.onClick.AddListener(() =>
-            {
-                IconSelectionView.SetActive(false);
-                blurImage.SetActive(false);
-            });
-        }
+        exitIconSelectionPopup.onClick.RemoveAllListeners();
+        exitIconSelectionPopup.onClick.AddListener(() =>
+        {
+            IconSelectionView.SetActive(false);
+            blurImage.SetActive(false);
+        });
+
+    }
 
 
-        //activate the createBlueprint page
-        public void createBlueprintPage()
+    //activate the createBlueprint page
+    public void createBlueprintPage()
         {
             mainMenuView.SetActive(false);
             loadBlueprintView.SetActive(false);
