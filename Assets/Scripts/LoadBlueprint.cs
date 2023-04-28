@@ -123,11 +123,11 @@ namespace JsonParser
                     // add all necessary components of the loading object
                     childObject = Instantiate(childObjectPrefab, panelTransform);
 
-                    childObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.label;
-                    childObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.description;
+                    childObject.transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.label;
+                    childObject.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.description;
 
 
-                    // check is any icon is accessible
+                    // check if any icon is accessible
                     if (blueprint.blueprintInformation.icons.Count > 0)
                     {
                         Texture2D texture = new Texture2D(2, 2);
@@ -136,14 +136,14 @@ namespace JsonParser
 
                         Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
 
-                        childObject.transform.GetChild(3).transform.GetChild(0).GetComponent<Image>().color = Color.white;
-                        childObject.transform.GetChild(3).transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
+                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
 
                     }
 
 
                     // delete button
-                    Button deleteButton = childObject.transform.GetChild(2).GetComponent<Button>();
+                    Button deleteButton = childObject.transform.Find("DeleteBlueprint").GetComponent<Button>();
                     deleteButton.onClick.RemoveAllListeners();
                     deleteButton.onClick.AddListener(() =>
                     {
@@ -164,7 +164,7 @@ namespace JsonParser
 
 
                     // copy to clipboard button
-                    Button copyToClipboard = childObject.transform.GetChild(4).GetComponent<Button>();
+                    Button copyToClipboard = childObject.transform.Find("Copystring").GetComponent<Button>();
                     copyToClipboard.onClick.RemoveAllListeners();
                     copyToClipboard.onClick.AddListener(() =>
                     {
@@ -174,7 +174,7 @@ namespace JsonParser
                         copyToClipboardButton.onClick.RemoveAllListeners();
                         copyToClipboardButton.onClick.AddListener(() =>
                         {
-                            Debug.Log(file.FullName);       //  encoded json string in the future
+                            Debug.Log(file.FullName);       
                             mainmenu.blurImage.SetActive(false);
                             mainmenu.copystringPopup.SetActive(false);
                         });
@@ -183,17 +183,18 @@ namespace JsonParser
 
 
                     // edit selected blueprint 
-                    Button editBlueprint = childObject.transform.GetChild(5).GetComponent<Button>();
+                    Button editBlueprint = childObject.transform.Find("EditBlueprint").GetComponent<Button>();
                     editBlueprint.onClick.RemoveAllListeners();
                     editBlueprint.onClick.AddListener(() =>
                     {
+
                         // activates blurimage and the load blueprint editor popup
                         mainmenu.blurImage.SetActive(true);
                         mainmenu.LoadBlueprintEditor.SetActive(true);
 
                         // sets the label and description to the parent of the button
-                        label = editBlueprint.transform.parent.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
-                        description = editBlueprint.transform.parent.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text;
+                        label = editBlueprint.transform.parent.Find("Label").GetComponent<TMPro.TextMeshProUGUI>().text;
+                        description = editBlueprint.transform.parent.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text;
 
                         // sets the input fields to the label and description
                         labelInputField.GetComponent<TMP_InputField>().text = label;
@@ -262,7 +263,7 @@ namespace JsonParser
                         else
                         {
                             t.GetComponent<Image>().color = new Color(0.6f, 0.6f, 0.6f);
-                            string selected_object = t.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
+                            string selected_object = t.Find("Label").GetComponent<TMPro.TextMeshProUGUI>().text;
                             Debug.Log(selected_object);
                         }
                     }
