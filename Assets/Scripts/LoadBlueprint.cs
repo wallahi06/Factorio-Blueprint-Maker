@@ -13,7 +13,7 @@ namespace JsonParser
 
     public class LoadBlueprint : MonoBehaviour
     {
-        
+
         private MainMenuHandler mainmenu;
         private CreateBlueprint blueprintCreater;
 
@@ -52,16 +52,6 @@ namespace JsonParser
             blueprintCreater = GetComponent<CreateBlueprint>();
         }
 
-        public void setDescription(string get_description)
-        {
-            description = get_description;
-        }
-
-        public void setLabel(string get_label)
-        {
-            label = get_label;
-        }
-
         // changes the blueprint information of the editBlueprint in the blueprint file (filePath) to the new_label and new_description
         public void editBlueprintFile(Blueprint editBlueprint, string new_label, string new_description, string filePath)
         {
@@ -74,12 +64,12 @@ namespace JsonParser
             File.WriteAllText(filePath, blueprint_result);
 
             // renames the blueprint file and .meta file to the label
-            string new_filePath = Path.Combine(Application.dataPath, $"blueprints/{label}.json");
+            string new_filePath = Path.Combine(Application.dataPath, $"blueprints/{new_label}.json");
             File.Move(filePath, new_filePath);
 
             if (File.Exists($"{filePath}.meta"))
             {
-                string new_metaFilePath = Path.Combine(Application.dataPath, $"blueprints/{label}.json.meta");
+                string new_metaFilePath = Path.Combine(Application.dataPath, $"blueprints/{new_label}.json.meta");
                 File.Move($"{filePath}.meta", new_metaFilePath);
             }
 
@@ -87,7 +77,7 @@ namespace JsonParser
             // update the loader
             get_blueprints();
         }
-         
+
 
         // deleted the loadObject and the file in the FilePath
         public void deleteBlueprintFile(GameObject loadObject, string FilePath)
@@ -130,9 +120,9 @@ namespace JsonParser
                     string jsonContent = File.ReadAllText(file.FullName);
                     blueprint = JsonConvert.DeserializeObject<Blueprint>(jsonContent);
 
-
                     // add all necessary components of the loading object
                     childObject = Instantiate(childObjectPrefab, panelTransform);
+
                     childObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.label;
                     childObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.description;
 
@@ -149,10 +139,8 @@ namespace JsonParser
                         childObject.transform.GetChild(3).transform.GetChild(0).GetComponent<Image>().color = Color.white;
                         childObject.transform.GetChild(3).transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
 
-                    } else
-                    {
-                        Debug.Log("No icon was selected");
                     }
+
 
                     // delete button
                     Button deleteButton = childObject.transform.GetChild(2).GetComponent<Button>();
@@ -199,36 +187,65 @@ namespace JsonParser
                     editBlueprint.onClick.RemoveAllListeners();
                     editBlueprint.onClick.AddListener(() =>
                     {
-
-                        labelInputField.GetComponent<TMP_InputField>().text = blueprint.blueprintInformation.label;
-                        descriptionInputField.GetComponent<TMP_InputField>().text = blueprint.blueprintInformation.description;
-
+                        // activates blurimage and the load blueprint editor popup
                         mainmenu.blurImage.SetActive(true);
                         mainmenu.LoadBlueprintEditor.SetActive(true);
 
+                        // sets the label and description to the parent of the button
+                        label = editBlueprint.transform.parent.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>().text;
+                        description = editBlueprint.transform.parent.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>().text;
+
+                        // sets the input fields to the label and description
+                        labelInputField.GetComponent<TMP_InputField>().text = label;
+                        descriptionInputField.GetComponent<TMP_InputField>().text = description;
+
+                        // listens for the edit button
                         editBlueprintEditorButton.onClick.RemoveAllListeners();
                         editBlueprintEditorButton.onClick.AddListener(() =>
                         {
-                            if (!string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text) && !string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text))
+                            bool fileExists = false;
+
+                            // iterate over all the files and check if the same name already exists
+                            for (int i = 0; i< files.Length; i++)
                             {
-                                editBlueprintFile(blueprint, labelInputField.GetComponent<TMP_InputField>().text, descriptionInputField.GetComponent<TMP_InputField>().text, file.FullName);
-                                mainmenu.blurImage.SetActive(false);
-                                mainmenu.LoadBlueprintEditor.SetActive(false);
-                            } else
-                            {
-                                Debug.Log("There's empty fields!");
+                                if (files[i].Extension == ".json")
+                                {
+                                    if (labelInputField.GetComponent<TMP_InputField>().text == Path.GetFileNameWithoutExtension(files[i].FullName))
+                                    {
+                                        fileExists = true;
+                                        break;
+                                    } 
+                                }
                             }
 
+                            if (fileExists)
+                            {
+                                Debug.Log("File already exists");
+                            }
+                            // if the name doesen't exit, edit the file
+                            else
+                            {
+                                // check for empty input fields
+                                if (!string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text) && !string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text))
+                                {
+                                    editBlueprintFile(blueprint, labelInputField.GetComponent<TMP_InputField>().text, descriptionInputField.GetComponent<TMP_InputField>().text, file.FullName);
+                                    mainmenu.blurImage.SetActive(false);
+                                    mainmenu.LoadBlueprintEditor.SetActive(false);
+                                }
+                                else
+                                {
+                                    Debug.Log("There's empty fields");
+                                }
+                            }
                         });
-
-                        changeIcon(file.FullName);
-
                     });
+
 
                     childObject.SetActive(true);
 
                 }
             }
+
 
             foreach (Transform child in panelTransform)
             {
@@ -253,66 +270,6 @@ namespace JsonParser
             }
 
 
-        }
-
-        void changeIcon(string filePath)
-        {
-
-            string jsonContent = File.ReadAllText(filePath);
-            blueprint = JsonConvert.DeserializeObject<Blueprint>(jsonContent);
-
-            foreach (Transform child in IconSlot.transform)
-            {
-                Button iconButton = child.transform.GetComponent<Button>();
-
-                iconButton.onClick.RemoveAllListeners();
-                iconButton.onClick.AddListener(() =>
-                {
-                    mainmenu.IconSelectionView.SetActive(true);
-
-                    if (iconButton.name == "IconSlot 1")
-                    {
-                        icon_index = 1;
-                    }
-                    else if (iconButton.name == "IconSlot 2")
-                    {
-                        icon_index = 2;
-                    }
-                    else if (iconButton.name == "IconSlot 3")
-                    {
-                        icon_index = 3;
-                    }
-                    else if (iconButton.name == "IconSlot 4")
-                    {
-                        icon_index = 4;
-                    }
-
-                    foreach (Transform Icon in IconObjectContainer)
-                    {
-                        Button iconSelectionButton = Icon.GetComponent<Button>();   
-
-                        iconSelectionButton.onClick.RemoveAllListeners();
-                        iconSelectionButton.onClick.AddListener(() =>
-                        {
-                            bool found = false;
-                            for (int i = 0; i < blueprint.blueprintInformation.icons.Count; i++) {
-                                if (icon_index == blueprint.blueprintInformation.icons[i].index) {
-                                    blueprint.blueprintInformation.icons[i].signal.name = iconSelectionButton.name;
-                                    Debug.Log("Load to already existing");
-                                    found = true;
-                                    break;
-                                } 
-                                if(!found)
-                                {
-                                    Debug.Log("Didnt find any icon");
-                                }
-
-                            }
-                            mainmenu.IconSelectionView.SetActive(false);
-                        });
-                    }
-                });
-            }
         }
 
     }

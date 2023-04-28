@@ -3738,7 +3738,7 @@ GameObject:
   - component: {fileID: 597814809}
   - component: {fileID: 597814808}
   m_Layer: 5
-  m_Name: Icon Selection (2)
+  m_Name: Description Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3756,6 +3756,7 @@ RectTransform:
   m_LocalScale: {x: 1.00035, y: 1.00035, z: 1.00035}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1491594872}
   - {fileID: 1474739054}
   m_Father: {fileID: 1298295844}
   m_RootOrder: 4
@@ -5664,10 +5665,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1049773079}
+  m_Children: []
   m_Father: {fileID: 1193162952}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -6278,18 +6278,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049773078}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 309319956}
-  m_Father: {fileID: 907162336}
+  m_Father: {fileID: 1193162952}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 131.11, y: -54.87}
+  m_AnchoredPosition: {x: -111.21011, y: -21.559994}
   m_SizeDelta: {x: 462.21, y: 63.74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1049773080
@@ -7046,7 +7046,7 @@ GameObject:
   - component: {fileID: 1193162954}
   - component: {fileID: 1193162953}
   m_Layer: 5
-  m_Name: Icon Selection (1)
+  m_Name: Label Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7064,6 +7064,7 @@ RectTransform:
   m_LocalScale: {x: 1.00035, y: 1.00035, z: 1.00035}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1049773079}
   - {fileID: 907162336}
   m_Father: {fileID: 1298295844}
   m_RootOrder: 3
@@ -9530,10 +9531,9 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1491594872}
+  m_Children: []
   m_Father: {fileID: 597814807}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -9863,16 +9863,16 @@ RectTransform:
   m_GameObject: {fileID: 1491594871}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0003124, y: 1.0003124, z: 1.0003124}
+  m_LocalScale: {x: 1.0003126, y: 1.0003126, z: 1.0003126}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2008575446}
-  m_Father: {fileID: 1474739054}
+  m_Father: {fileID: 597814807}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 240.95, y: -199.17}
+  m_AnchoredPosition: {x: 0.9499512, y: -25.169983}
   m_SizeDelta: {x: 681.68, y: 355.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1491594873
@@ -10248,13 +10248,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87efd968682b09b4c89788e06b8c8089, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selected_object: 
   childObjectPrefab: {fileID: 1959252351}
   panelTransform: {fileID: 1331875458}
-  testButton: {fileID: 1929643612}
+  IconObjectContainer: {fileID: 637159267}
+  deleteBlueprintButton: {fileID: 1929643612}
   editBlueprintEditorButton: {fileID: 789910083}
   copyToClipboardButton: {fileID: 904313035}
-  IconObjectContainer: {fileID: 637159267}
+  labelInputField: {fileID: 1049773078}
+  descriptionInputField: {fileID: 1491594871}
+  IconSlot: {fileID: 1213863663}
 --- !u!114 &1556570614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10271,7 +10273,6 @@ MonoBehaviour:
   descriptionInputField: {fileID: 1738216132}
   IconObjectPrefab: {fileID: 2043723999}
   IconObjectContainer: {fileID: 637159267}
-  iconSelectionView: {fileID: 1761102375}
   IconSlots: {fileID: 2080357606}
 --- !u!1 &1565702615
 GameObject:
