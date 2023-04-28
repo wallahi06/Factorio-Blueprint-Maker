@@ -75,7 +75,6 @@ namespace JsonParser
         GameObject childObject;
         public GameObject IconSlots;
 
-
         private MainMenuHandler mainmenu;
 
         private Blueprint blueprint;
