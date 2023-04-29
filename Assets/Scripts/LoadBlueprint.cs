@@ -92,7 +92,6 @@ namespace JsonParser
         }
 
 
-
         // Creates loading obejcts
         public void get_blueprints()
         {
@@ -130,9 +129,15 @@ namespace JsonParser
                     // check if any icon is accessible
                     if (blueprint.blueprintInformation.icons.Count > 0)
                     {
-                        Sprite iconSprite = Resources.Load<Sprite>($"InventoryIcons/{blueprint.blueprintInformation.icons[0].signal.name}");
+                        Sprite iconPlaceholderSprite = Resources.Load<Sprite>($"InventoryIcons/{blueprint.blueprintInformation.icons[0].signal.name}");
                         childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().color = Color.white;
-                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().sprite = iconSprite;
+                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().sprite = iconPlaceholderSprite;
+                    } 
+                    if (blueprint.blueprintInformation.icons.Count == 0)
+                    {
+                        Sprite iconPlaceholderSprite = Resources.Load<Sprite>("Icons/No-selected-icon");
+                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().sprite = iconPlaceholderSprite;
                     }
 
 
