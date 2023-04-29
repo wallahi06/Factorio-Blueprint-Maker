@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 83794754}
   - component: {fileID: 83794753}
   m_Layer: 5
-  m_Name: Blueprint Title
+  m_Name: Label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 90473181}
   - component: {fileID: 90473180}
   m_Layer: 5
-  m_Name: Copy String Button
+  m_Name: Copystring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1238,7 +1238,7 @@ GameObject:
   - component: {fileID: 147855574}
   - component: {fileID: 147855573}
   m_Layer: 5
-  m_Name: Edit Blueprint Button
+  m_Name: EditBlueprint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3404,7 +3404,7 @@ GameObject:
   - component: {fileID: 566138554}
   - component: {fileID: 566138553}
   m_Layer: 5
-  m_Name: Blueprint Icon
+  m_Name: IconPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3481,7 +3481,7 @@ GameObject:
   - component: {fileID: 585290608}
   - component: {fileID: 585290607}
   m_Layer: 5
-  m_Name: Blueprint Description
+  m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4895,7 +4895,7 @@ GameObject:
   - component: {fileID: 807375430}
   - component: {fileID: 807375429}
   m_Layer: 5
-  m_Name: Delete Blueprint Button
+  m_Name: DeleteBlueprint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8418,7 +8418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1298295844
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8597,7 +8597,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: -0.000030517578, y: -0.000030517578}
-  m_SizeDelta: {x: 1200, y: 40}
+  m_SizeDelta: {x: 1200, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1331875459
 MonoBehaviour:
@@ -11168,7 +11168,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1735974022
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13754,7 +13754,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2086301517
 RectTransform:
   m_ObjectHideFlags: 0

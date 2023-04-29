@@ -300,24 +300,14 @@ namespace JsonParser
                         addIcon(child.name, icon_index);
                     }
 
-                    Texture2D texture = new Texture2D(2, 2);
-                    byte[] imageData = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{child.name}.png");
-                    texture.LoadImage(imageData);
-
-                    Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
-
-                    IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
+                    Sprite iconSprite = Resources.Load<Sprite>($"InventoryIcons/{child.name}");
                     IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                    IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().sprite = iconSprite;
                     IconSlots.transform.GetChild(icon_index - 1).name = child.name;
 
-                    Texture2D texture2 = new Texture2D(2, 2);
-                    byte[] imageData2 = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{blueprintInformation.icons[0].signal.name}.png");
-                    texture2.LoadImage(imageData2);
-
-                    Sprite newSprite2 = Sprite.Create(texture2, new Rect(0, 0, texture2.width, texture2.height), Vector2.one * 0.5f);
-
+                    Sprite iconPlaceholderSprite = Resources.Load<Sprite>($"InventoryIcons/{blueprintInformation.icons[0].signal.name}");
                     IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
-                    IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = newSprite2;
+                    IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = iconPlaceholderSprite;
 
                     mainmenu.IconSelectionView.SetActive(false);
 
@@ -343,15 +333,9 @@ namespace JsonParser
                     childObject.SetActive(true);
                     childObject.name = Path.GetFileNameWithoutExtension(file.FullName);
 
-                    Texture2D texture = new Texture2D(2, 2);
-                    byte[] imageData = File.ReadAllBytes(file.FullName);
-                    texture.LoadImage(imageData);
-
-                    Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
-
+                    Sprite inventorySprite = Resources.Load<Sprite>($"InventoryIcons/{Path.GetFileNameWithoutExtension(file.FullName)}");
                     Image imageComponent = childObject.transform.GetChild(0).GetComponent<Image>();
-
-                    imageComponent.sprite = newSprite;
+                    imageComponent.sprite = inventorySprite;
 
                 }
             }

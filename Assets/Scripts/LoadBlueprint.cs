@@ -130,15 +130,9 @@ namespace JsonParser
                     // check if any icon is accessible
                     if (blueprint.blueprintInformation.icons.Count > 0)
                     {
-                        Texture2D texture = new Texture2D(2, 2);
-                        byte[] imageData = File.ReadAllBytes($"{Application.dataPath}/Resources/InventoryIcons/{blueprint.blueprintInformation.icons[0].signal.name}.png");
-                        texture.LoadImage(imageData);
-
-                        Sprite newSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.one * 0.5f);
-
+                        Sprite iconSprite = Resources.Load<Sprite>($"InventoryIcons/{blueprint.blueprintInformation.icons[0].signal.name}");
                         childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().color = Color.white;
-                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().sprite = newSprite;
-
+                        childObject.transform.Find("IconPlaceholder").transform.GetChild(0).GetComponent<Image>().sprite = iconSprite;
                     }
 
 
@@ -147,7 +141,6 @@ namespace JsonParser
                     deleteButton.onClick.RemoveAllListeners();
                     deleteButton.onClick.AddListener(() =>
                     {
-
                         mainmenu.blurImage.SetActive(true);
                         mainmenu.DeleteBlueprintPopup.SetActive(true);
 
