@@ -1,5 +1,5 @@
 # Factorio App
-![Namnlös design](https://user-images.githubusercontent.com/86798194/235298171-e520340b-e47e-4b01-a58d-a400ebdfbd19.png)
+![Namnlös design](https://user-images.githubusercontent.com/86798194/235298223-7e389598-37b4-4652-94bd-2dba2ab90153.png)
 
 ## Main Menu System
 - Change icon on already created files
