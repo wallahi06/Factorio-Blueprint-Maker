@@ -78,7 +78,7 @@ public class CreateBlueprint : MonoBehaviour
     private GameObject childObject;
 
 
-
+    // run on start
     void Start()
     {
         mainMenu = GetComponent<MainMenuHandler>();
@@ -86,10 +86,13 @@ public class CreateBlueprint : MonoBehaviour
     }
 
 
+    // runs when the user presses the create blueprint button in the main menu
     public void blueprintCreateStart()
     {
+        // create a new blueprint object
         createBlueprintObject();
 
+        // get all the icon slot buttons and set the icon index
         foreach (Transform child in IconSlots.transform)
         {
             Button iconSlotButton = child.GetComponent<Button>();
@@ -126,7 +129,6 @@ public class CreateBlueprint : MonoBehaviour
         // sets all blueprint information parameters
         blueprint = new Blueprint()
         {
-
             blueprintInformation = new BlueprintInformation()
             {
 
@@ -141,19 +143,22 @@ public class CreateBlueprint : MonoBehaviour
 
     public void loadBlueprintInformation()
     {
+        // sets the label and description to the values of the input fields
         label = labelInputField.GetComponent<TMP_InputField>().text;
         description = descriptionInputField.GetComponent<TMP_InputField>().text;
 
+        // get all the files in the blueprint folder to check if the file already exists
         string path = Path.Combine(Application.dataPath, "blueprints/");
         DirectoryInfo dir = new DirectoryInfo(path);
         FileInfo[] files = dir.GetFiles();
-
         bool exists = false;
 
+        // iterates over all the files that has the extensino .json
         for (int i = 0; i < files.Length; i++)
         {
             if (files[i].Extension == ".json")
             {
+                // check if the file already exists
                 if (Path.GetFileNameWithoutExtension(files[i].FullName) == label)
                 {
                     exists = true;
@@ -161,6 +166,7 @@ public class CreateBlueprint : MonoBehaviour
             } 
         }
 
+        // if the file doesent exist, move on
         if (!exists)
         {
             // check if the input fields are empty or if the file already exists
@@ -181,9 +187,7 @@ public class CreateBlueprint : MonoBehaviour
         {
             Debug.Log("The file already exists");
             resetCreateFileView();
-        }
-
-       
+        }     
     }
 
 
@@ -194,6 +198,7 @@ public class CreateBlueprint : MonoBehaviour
         foreach (Transform child in IconObjectContainer)
         {
 
+            // if the iconSelection is pressed then initiate the icon object
             Button IconSelectionButton = child.GetComponent<Button>();
             IconSelectionButton.onClick.RemoveAllListeners();
             IconSelectionButton.onClick.AddListener(() => {
@@ -208,13 +213,16 @@ public class CreateBlueprint : MonoBehaviour
                     index = icon_index
                 };
 
+                // add the icon to the blueprint
                 blueprint.blueprintInformation.icons.Add(icon);
 
+                // set the icon slot image to the selected icon
                 Sprite iconSprite = Resources.Load<Sprite>($"InventoryIcons/{child.name}");
                 IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
                 IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().sprite = iconSprite;
                 IconSlots.transform.GetChild(icon_index - 1).name = child.name;
 
+                // set the icon placeholder to the first icon in the blueprint object
                 Sprite iconPlaceholderSprite = Resources.Load<Sprite>($"InventoryIcons/{blueprint.blueprintInformation.icons[0].signal.name}");
                 IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
                 IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = iconPlaceholderSprite;
