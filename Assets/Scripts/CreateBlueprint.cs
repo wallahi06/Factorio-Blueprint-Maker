@@ -148,20 +148,42 @@ public class CreateBlueprint : MonoBehaviour
         DirectoryInfo dir = new DirectoryInfo(path);
         FileInfo[] files = dir.GetFiles();
 
-        // check if the input fields are empty or if the file already exists
-        if (!string.IsNullOrEmpty(label) || !string.IsNullOrEmpty(description))
-        {
-           blueprint.blueprintInformation.label = label;
-           blueprint.blueprintInformation.description = description;
+        bool exists = false;
 
-           writeToFile();
-           resetCreateFileView();
-
-        }
-        else
+        for (int i = 0; i < files.Length; i++)
         {
-            Debug.Log("There's empty fields");
+            if (files[i].Extension == ".json")
+            {
+                if (Path.GetFileNameWithoutExtension(files[i].FullName) == label)
+                {
+                    exists = true;
+                }
+            } 
         }
+
+        if (!exists)
+        {
+            // check if the input fields are empty or if the file already exists
+            if (!string.IsNullOrEmpty(label) || !string.IsNullOrEmpty(description))
+            {
+                blueprint.blueprintInformation.label = label;
+                blueprint.blueprintInformation.description = description;
+
+                writeToFile();
+                resetCreateFileView();
+
+            }
+            else
+            {
+                Debug.Log("There's empty fields");
+            }
+        } else
+        {
+            Debug.Log("The file already exists");
+            resetCreateFileView();
+        }
+
+       
     }
 
 
@@ -208,6 +230,7 @@ public class CreateBlueprint : MonoBehaviour
     // writes the blueprint to a blueprint file
     public void writeToFile()
     {
+
         // path were we store the blueprint file
         string folderPath = Path.Combine(Application.dataPath, "blueprints");
         string filePath = Path.Combine(folderPath, $"{label}.json");
