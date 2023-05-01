@@ -22,6 +22,6 @@ The Factorio Blueprint Maker is mainly developed by Liam Nordvall and Henrik Wer
 
 The idea and concept was made by Henrik Werder
 
-All credits for all the icons, iteam, sounds etc. used in the app goes tp Wube Software and their team. 
+All credits for all the icons, iteam, sounds, etc used in the app goes to Wube Software and their team. 
 
 
