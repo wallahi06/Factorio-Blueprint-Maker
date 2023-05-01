@@ -2,7 +2,8 @@
 
 # Factorio Blueprint Maker App
 
-Factorio Blueprint Maker is an easy-to-use app designed for Factorio players, allowing them to create blueprints for their constructions within the game. Using the app, players can quickly design and customize blueprints for factories, buildings, railways, and other structures. The app provides a grid-based interface where players can easily place pre-designed objects onto the blueprint canvas.
+Factorio Blueprint Maker is an easy-to-use app designed for Factorio players, allowing them to create blueprints for their constructions within the game. Using the app, players can quickly design and customize blueprints for factories, buildings, railways, and other structures. The app provides a grid-based interface where players can easily place pre-designed objects onto the blueprint canvas. 
+
 
 The app offers a wide variety of pre-designed objects to choose from, including different types of factories, conveyors, inserters, and other items commonly used in Factorio
 
@@ -24,4 +25,7 @@ The idea and concept was made by Henrik Werder
 
 All credits for all the icons, iteam, sounds, etc used in the app goes to Wube Software and their team. 
 
+
+## App Icon
+![AppIcon](https://user-images.githubusercontent.com/86798194/235517557-1c94bc25-061f-4e37-929e-fbf264b89dbd.png)
 
