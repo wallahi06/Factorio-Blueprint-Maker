@@ -1,4 +1,4 @@
-// include libraries
+/*// include libraries
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -68,9 +68,14 @@ public class CreateBlueprint : MonoBehaviour
     [SerializeField] public GameObject labelInputField;
     [SerializeField] public GameObject descriptionInputField;
     [SerializeField] public GameObject IconSlots;
-    [SerializeField] public GameObject IconObjectPrefab;
     [SerializeField] public Transform IconObjectContainer;
 
+    public GameObject scrollContainer;
+    public GameObject IconSelectionView;
+    public GameObject prefab;
+
+    public int numOfOfObject = 4;
+    private float spacing;
     private string label;
     private string description;
     private int icon_index;
@@ -82,7 +87,19 @@ public class CreateBlueprint : MonoBehaviour
     void Start()
     {
         mainMenu = GetComponent<MainMenuHandler>();
-        initiateIconInventory();
+
+        IconSelectionView.SetActive(false);
+        InitiateIconSelection();
+
+        float width = scrollContainer.GetComponent<RectTransform>().rect.width;
+
+        spacing = width * 0.06f;
+        Vector2 newGridSize = new Vector2((width - ((numOfOfObject + 1) * spacing)) / numOfOfObject, (width - ((numOfOfObject + 1) * spacing)) / numOfOfObject);
+        Vector2 spacingTest = new Vector2(spacing, spacing);
+        scrollContainer.GetComponent<GridLayoutGroup>().cellSize = newGridSize;
+        scrollContainer.GetComponent<GridLayoutGroup>().spacing = spacingTest;
+
+        scrollContainer.GetComponent<GridLayoutGroup>().padding = new RectOffset((int)spacing, (int)spacing, (int)spacing, (int)spacing);
     }
 
 
@@ -116,7 +133,8 @@ public class CreateBlueprint : MonoBehaviour
                     icon_index = 4;
                 }
 
-                setBlueprintIcon();
+                IconSelectionView.SetActive(true);
+
             });
         }
     }
@@ -149,7 +167,7 @@ public class CreateBlueprint : MonoBehaviour
 
         // get all the files in the blueprint folder to check if the file already exists
         string path = Path.Combine(Application.dataPath, "blueprints/");
-        DirectoryInfo dir = new DirectoryInfo(path);
+         DirectoryInfo dir = new DirectoryInfo(path);
         FileInfo[] files = dir.GetFiles();
         bool exists = false;
 
@@ -191,48 +209,7 @@ public class CreateBlueprint : MonoBehaviour
     }
 
 
-    public void setBlueprintIcon()
-    {
-        mainMenu.IconSelectionView.SetActive(true);
-
-        foreach (Transform child in IconObjectContainer)
-        {
-
-            // if the iconSelection is pressed then initiate the icon object
-            Button IconSelectionButton = child.GetComponent<Button>();
-            IconSelectionButton.onClick.RemoveAllListeners();
-            IconSelectionButton.onClick.AddListener(() => {
-
-                Icon icon = new Icon()
-                {
-                    signal = new Signal()
-                    {
-                        type = "item",
-                        name = child.name
-                    },
-                    index = icon_index
-                };
-
-                // add the icon to the blueprint
-                blueprint.blueprintInformation.icons.Add(icon);
-
-                // set the icon slot image to the selected icon
-                Sprite iconSprite = Resources.Load<Sprite>($"InventoryIcons/{child.name}");
-                IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
-                IconSlots.transform.GetChild(icon_index - 1).transform.GetChild(0).GetComponent<Image>().sprite = iconSprite;
-                IconSlots.transform.GetChild(icon_index - 1).name = child.name;
-
-                // set the icon placeholder to the first icon in the blueprint object
-                Sprite iconPlaceholderSprite = Resources.Load<Sprite>($"InventoryIcons/{blueprint.blueprintInformation.icons[0].signal.name}");
-                IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().color = Color.white;
-                IconSlots.transform.parent.transform.GetChild(1).transform.GetChild(0).GetComponent<Image>().sprite = iconPlaceholderSprite;
-
-                mainMenu.IconSelectionView.SetActive(false);
-            });
-
-        }
-    }
-
+   
 
 
     // writes the blueprint to a blueprint file
@@ -285,27 +262,50 @@ public class CreateBlueprint : MonoBehaviour
 
 
     // gets all the files from the icon dictory and adds an object for each file
-    void initiateIconInventory()
+    public void InitiateIconSelection()
     {
-        // stores all the files in "files"
-        string path = Path.Combine(Application.dataPath, "Resources/InventoryIcons/");
-        DirectoryInfo dir = new DirectoryInfo(path);
-        FileInfo[] files = dir.GetFiles();
+        string path = "InventoryIcons";
+        Object[] icons = Resources.LoadAll(path, typeof(Texture2D));
 
-        // iterates over all the files
-        foreach (FileInfo file in files)
+        foreach (Object icon in icons)
         {
-            if (file.Extension == ".png")
+            GameObject instance = Instantiate(prefab, scrollContainer.transform);
+            instance.name = icon.name;
+            instance.transform.GetChild(0).GetComponent<Image>().sprite = Sprite.Create(icon as Texture2D, new Rect(0, 0, (icon as Texture2D).width, (icon as Texture2D).height), Vector2.zero);
+
+            Button iconButton = instance.GetComponent<Button>();
+            iconButton.onClick.RemoveAllListeners();
+            iconButton.onClick.AddListener(() =>
             {
-                childObject = Instantiate(IconObjectPrefab, IconObjectContainer);
-                childObject.SetActive(true);
-                childObject.name = Path.GetFileNameWithoutExtension(file.FullName);
+                Icon icon = new Icon()
+                {
+                    signal = new Signal()
+                    {
+                        type = "item",
+                        name = iconButton.name
+                    },
+                    index = icon_index
+                };
 
-                Sprite inventorySprite = Resources.Load<Sprite>($"InventoryIcons/{Path.GetFileNameWithoutExtension(file.FullName)}");
-                Image imageComponent = childObject.transform.GetChild(0).GetComponent<Image>();
-                imageComponent.sprite = inventorySprite;
+                // add the icon to the blueprint
+                blueprint.blueprintInformation.icons.Add(icon);
 
-            }
+                Debug.Log(iconButton.name);
+
+                IconSelectionView.SetActive(false);
+            });
+         
+
+            Button exitButton = IconSelectionView.transform.Find("Exit").GetComponent<Button>();
+            exitButton.onClick.RemoveAllListeners();
+            exitButton.onClick.AddListener(() =>
+            {
+                IconSelectionView.SetActive(false);
+            });
+
+
         }
+
     }
 }
+*/
