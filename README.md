@@ -11,3 +11,17 @@ Once the blueprint is complete, players can generate a Factorio string that repr
 Unfortunately, the app does not currently support sharing blueprints with other players. However, players can still save their blueprints within the app for future use, making it easy to recreate their favorite designs in different game worlds.
 
 Overall, the Factorio Blueprint Maker app is a valuable tool for players looking to streamline their construction projects in the game, allowing them to quickly and easily create custom blueprints on the go.
+
+
+## Getting Help
+For help, support, discussion or bugs please contact us at liam_nordvall@hotmail.com
+
+
+## Credits
+The Factorio Blueprint Maker is mainly developed by Liam Nordvall and Henrik Werder togheter with other close collaborators
+
+The idea and concept was made by Henrik Werder
+
+All credits for all the icons, iteam, sounds etc. used in the app goes tp Wube Software and their team. 
+
+
