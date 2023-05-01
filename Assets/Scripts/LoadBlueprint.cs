@@ -121,10 +121,8 @@ namespace JsonParser
 
                     // add all necessary components of the loading object
                     childObject = Instantiate(childObjectPrefab, panelTransform);
-
                     childObject.transform.Find("Label").GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.label;
                     childObject.transform.Find("Description").GetComponent<TMPro.TextMeshProUGUI>().text = blueprint.blueprintInformation.description;
-
 
                     // check if any icon is accessible
                     if (blueprint.blueprintInformation.icons.Count > 0)

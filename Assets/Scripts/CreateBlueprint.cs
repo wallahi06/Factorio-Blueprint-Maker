@@ -119,10 +119,10 @@ public class CreateBlueprint : MonoBehaviour
                 setBlueprintIcon();
             });
         }
-
     }
 
 
+    // creates an empty blueprint object that will later store information about the blueprint
     public void createBlueprintObject()
     {
 

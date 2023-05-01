@@ -155,6 +155,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
+    Standalone: com.DefaultCompany.Factorio-App
     iPhone: com.DefaultCompany.Factorio-App
   buildNumber:
     Standalone: 0
