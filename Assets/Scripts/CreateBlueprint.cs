@@ -202,15 +202,56 @@ public class CreateBlueprint : MonoBehaviour
 
     public void loadBlueprintInformation()
     {
+        // sets the label and descriptino to the values of the input fields
         label = labelInputField.GetComponent<TMP_InputField>().text;
         description = descriptionInputField.GetComponent<TMP_InputField>().text;
 
-        blueprint.blueprintInformation.label = label;
-        blueprint.blueprintInformation.description = description;
 
-        Debug.Log(blueprint.blueprintInformation.label);
-        Debug.Log(blueprint.blueprintInformation.description);
-        Debug.Log(blueprint.blueprintInformation.icons[0].signal.name);
-       
+        string filePath = Path.Combine(Application.streamingAssetsPath, $"blueprints/{label}.json");
+        bool fileExists;
+
+        if (File.Exists(filePath))
+        {
+            fileExists = true;
+            Debug.Log("The File already exists");
+        } else
+        {
+            fileExists = false;
+        }
+
+        i
+
+        // check if the input fields are empty
+        if (!labelInputField.GetComponent<TMP_InputField>().text.IsEmptyOrNull && !descriptionInputField.GetComponent<TMP_InputField>().text.IsEmptyOrNull)
+        {
+            if (!fileExists)
+            {
+                Debug.Log("No fields are empty and the file doesn't exist");
+                blueprint.blueprintInformation.label = label;
+                blueprint.blueprintInformation.description = description;
+            }
+        } else
+        {
+            Debug.Log("some input fields may be empty");
+        }
+    }
+
+
+    // write the new blueprint to a blueprint file
+    public void writeToFile()
+    {
+        string folderPath = Application.streamingAssetsPath + "/blueprints/";
+        string fileName = $"{blueprint.blueprintInformation.label}.json";
+
+        // check is the folder already exists
+        if (!Directory.Exists(folderPath))
+        {
+            Directory.CreateDirectory(folderPath);
+        }
+
+        string blueprintFile = JsonConvert.SerializeObject(blueprint, Formatting.Indented);
+
+        File.WriteAllText(folderPath + fileName, blueprintFile);
+
     }
 }
