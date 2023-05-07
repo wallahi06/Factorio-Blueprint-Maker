@@ -1,0 +1,16 @@
+{
+  "blueprintInformation": {
+    "label": "hej",
+    "description": "hej",
+    "entities": [],
+    "icons": [
+      {
+        "signal": {
+          "type": "item",
+          "name": "accumulator"
+        },
+        "index": 1
+      }
+    ]
+  }
+}

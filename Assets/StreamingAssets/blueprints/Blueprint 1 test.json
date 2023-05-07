@@ -1,0 +1,37 @@
+{
+  "blueprintInformation": {
+    "label": "Blueprint 1 test",
+    "description": "Blueprint 1 test description",
+    "entities": [],
+    "icons": [
+      {
+        "signal": {
+          "type": "item",
+          "name": "advanced-circuit"
+        },
+        "index": 1
+      },
+      {
+        "signal": {
+          "type": "item",
+          "name": "assembling-machine-1"
+        },
+        "index": 1
+      },
+      {
+        "signal": {
+          "type": "item",
+          "name": "assembling-machine-2"
+        },
+        "index": 2
+      },
+      {
+        "signal": {
+          "type": "item",
+          "name": "assembling-machine-3"
+        },
+        "index": 3
+      }
+    ]
+  }
+}

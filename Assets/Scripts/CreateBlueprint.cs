@@ -162,7 +162,13 @@ public class CreateBlueprint : MonoBehaviour
                     index = icon_index
                 };
 
+                // check if icon already exists
                 blueprint.blueprintInformation.icons.Add(icon);
+
+                Sprite newSprite = Resources.Load<Sprite>($"InventoryIcons/{iconButton.name}");
+
+                IconSlots.transform.GetChild(icon_index - 1).GetComponent<Image>().sprite = newSprite;
+                IconSlots.transform.GetChild(icon_index - 1).GetComponent<Image>().color = new Color(1, 1, 1);
 
                 mainMenu.IconSelectionView.SetActive(false);
             });
@@ -219,16 +225,18 @@ public class CreateBlueprint : MonoBehaviour
             fileExists = false;
         }
 
-        i
+        
 
         // check if the input fields are empty
-        if (!labelInputField.GetComponent<TMP_InputField>().text.IsEmptyOrNull && !descriptionInputField.GetComponent<TMP_InputField>().text.IsEmptyOrNull)
+        if (!string.IsNullOrEmpty(labelInputField.GetComponent<TMP_InputField>().text) && !string.IsNullOrEmpty(descriptionInputField.GetComponent<TMP_InputField>().text))
         {
             if (!fileExists)
             {
-                Debug.Log("No fields are empty and the file doesn't exist");
                 blueprint.blueprintInformation.label = label;
                 blueprint.blueprintInformation.description = description;
+
+                resetCreateFileView();
+                writeToFile();
             }
         } else
         {
@@ -253,5 +261,12 @@ public class CreateBlueprint : MonoBehaviour
 
         File.WriteAllText(folderPath + fileName, blueprintFile);
 
+    }
+
+
+    public void resetCreateFileView()
+    {
+        labelInputField.GetComponent<TMP_InputField>().text = null;
+        descriptionInputField.GetComponent<TMP_InputField>().text = null;
     }
 }
