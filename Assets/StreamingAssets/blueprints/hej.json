@@ -7,9 +7,16 @@
       {
         "signal": {
           "type": "item",
-          "name": "accumulator"
+          "name": "artillery-targeting-remote"
         },
         "index": 1
+      },
+      {
+        "signal": {
+          "type": "item",
+          "name": "automation-science-pack"
+        },
+        "index": 2
       }
     ]
   }

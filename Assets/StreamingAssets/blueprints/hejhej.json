@@ -1,16 +1,9 @@
 {
   "blueprintInformation": {
-    "label": "Blueprint 1 test",
-    "description": "Blueprint 1 test description",
+    "label": "hejhej",
+    "description": "hejhej",
     "entities": [],
     "icons": [
-      {
-        "signal": {
-          "type": "item",
-          "name": "advanced-circuit"
-        },
-        "index": 1
-      },
       {
         "signal": {
           "type": "item",

@@ -151,19 +151,32 @@ public class CreateBlueprint : MonoBehaviour
             iconButton.onClick.RemoveAllListeners();
             iconButton.onClick.AddListener(() =>
             {
-
-                Icon icon = new Icon()
+                bool indexExists = blueprint.blueprintInformation.icons.Exists(existingIcon => existingIcon.index == icon_index);
+                if (indexExists)
                 {
-                    signal = new Signal()
+                    for (int i = 0; i <  blueprint.blueprintInformation.icons.Count; i++)
                     {
-                        type = "item",
-                        name = iconButton.name
-                    },
-                    index = icon_index
-                };
+                        if (icon_index == blueprint.blueprintInformation.icons[i].index)
+                        {
+                            blueprint.blueprintInformation.icons[i].index = icon_index;
+                            blueprint.blueprintInformation.icons[i].signal.name = iconButton.name;
+                            blueprint.blueprintInformation.icons[i].signal.type = "item";
+                        }
+                    }
+                } else
+                {
+                    Icon icon = new Icon()
+                    {
+                        signal = new Signal()
+                        {
+                            type = "item",
+                            name = iconButton.name
+                        },
+                        index = icon_index
+                    };
 
-                // check if icon already exists
-                blueprint.blueprintInformation.icons.Add(icon);
+                    blueprint.blueprintInformation.icons.Add(icon);
+                }
 
                 Sprite newSprite = Resources.Load<Sprite>($"InventoryIcons/{iconButton.name}");
 
