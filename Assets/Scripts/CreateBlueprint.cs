@@ -151,6 +151,7 @@ public class CreateBlueprint : MonoBehaviour
             iconButton.onClick.RemoveAllListeners();
             iconButton.onClick.AddListener(() =>
             {
+                // check if the icon index already exists
                 bool indexExists = blueprint.blueprintInformation.icons.Exists(existingIcon => existingIcon.index == icon_index);
                 if (indexExists)
                 {
@@ -281,5 +282,12 @@ public class CreateBlueprint : MonoBehaviour
     {
         labelInputField.GetComponent<TMP_InputField>().text = null;
         descriptionInputField.GetComponent<TMP_InputField>().text = null;
+
+        // iterate over all the icon slots and reset them
+        for (int i = 0; i < IconSlots.transform.childCount; i++) {
+            IconSlots.transform.GetChild(i).GetComponent<Image>().sprite = null;
+            IconSlots.transform.GetChild(i).GetComponent<Image>().color = new Color(0.227451f, 0.227451f, 0.227451f);
+        }
+
     }
 }
