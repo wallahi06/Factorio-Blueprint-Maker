@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' /> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    
+    <main>
+    <div class="loginContainer">
+      <h1>Welcome</h1>
+      <h2>Sign in to continue</h2>
+      <div class="inputForm">
+        <form>
+          <input type="text" id="signinEmail" class="signinEmail" placeholder="Please enter your email">
+          <input type="password" id="signinPassword" class="signinPassword" placeholder="Please enter your password">
+          <a href="#">Forgot Password?</a>
+          <button type="button">Signin</button>
+        </form>
+      </div>
+      <div class="GoogleAndSteamForm">
+        <div class="SigninWithGoogle">
+          <img src="./public/assets/google_logo.png">
+          <div class="textContainer">Sign in with Google</div>
+        </div>
+        <div class="SigninWithSteam">
+          <img src="./public/assets/steam_logo.png">
+          <div class="textContainer">Sign in with Steam</div>
+        </div>
+      </div>
+      <div class="notAMember">
+        <a href="#">Not a Member? Singup</a>
+      </div>
+    </div>
+
+    
+    <nav class="navbar">
+      <a href="#" class="logo"><img src="./public/assets/factorio_blueprint_maker_logo.png"></a>
+      <div class="nav-links">
+          <ul>
+              <li><a href="#">Explore</a></li>
+              <li><a href="#">Donate</a></li>
+              <li><a href="#">Login</a></li>
+              <li><button type="button" class="signupBtn_nav">Signup</button></li>
+          </ul>
+      </div>
+      <img src="./public/assets/menu-button.png" alt="menu hamburger" class="menu-hamburger">
+  </nav>
+  </main>
+
+
+  <script>
+
+    const menuHamburger = document.querySelector(".menu-hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuHamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("mobile-menu");
+    })
+
+</script>
+
+  
+  </body>
+</html>
